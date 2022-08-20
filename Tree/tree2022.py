@@ -124,8 +124,54 @@ class Node:
                 q.append(p.right)
         
         return ele
-
+    
+    def rsearch(self, root, key):
+        p = root
+        if p is None:
+            return False
+        elif p.data == key:
+            return p.data
+        elif key < p.data:
+            return self.rsearch(p.left, key)
+        else:
+            return self.rsearch(p.right, key)      
         
+    def itrsearch(self, root, key):
+        p = root
+        
+        while p is not None:
+            if key == p.data:
+                return p.data
+            
+            elif key < p.data:
+                p = p.left
+                
+            else:
+                p = p.right 
+                
+        return False     
+    
+    def insertnode(self, key):
+        p = root
+        r = None
+        while p is not None:
+            if key == p.data:
+                return p.data
+
+            elif key < p.data:
+                r = p
+                p = p.left
+
+            else:
+                r = p
+                p = p.right
+                
+        p = Node(key)
+        if p.data < r.data:
+            r.left = p
+        else:
+            r.right = p
+             
         
 if __name__ == '__main__':
     data = [21,28,14,32,25,18,11]
@@ -133,5 +179,8 @@ if __name__ == '__main__':
     for i in range(1, len(data)):
         root.insert(data[i])
     
-    print(root.lvlorder())
+    print(root.inOrder())
+    root.insertnode(33)
+    print(root.inOrder())
+
 
